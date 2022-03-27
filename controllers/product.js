@@ -4,8 +4,10 @@ import User from "../models/user";
 // Product
 // them product
 export const create = async (req, res) => {
+    console.log(req.body);
     try {
         const product = await new Product(req.body).save();
+        console.log('product', product);
         res.json(product)    
     } catch (error) {
         res.status(400).json({
@@ -57,29 +59,6 @@ export const update = async (req, res) => {
     try {
         const product = await Product.findOneAndUpdate(condition, doc, option);
         res.json(product);
-    } catch (error) {
-        res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
-        })
-    }
-}
-
-// User
-export const adduser = async (req, res) => {
-    try {
-        const user = await User(req.body).save();
-        res.json(user)    
-    } catch (error) {
-        res.status(400).json({
-            message: "Không thêm được tài khoản "
-        })
-    }
-}
-
-export const listUser = async (req, res) => { 
-    try {
-        const user = await User.find();
-        res.json(user);
     } catch (error) {
         res.status(400).json({
             message: "Lỗi không tìm được sản phẩm"
